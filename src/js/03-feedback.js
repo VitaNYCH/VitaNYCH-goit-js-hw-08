@@ -6,6 +6,7 @@ const refs = {
   emailarea: document.querySelector('.feedback-form input'),
   textarea: document.querySelector('.feedback-form textarea'),
 };
+
 refs.form.addEventListener('submit', onFormSubmit);
 refs.emailarea.addEventListener('input', throttle(onEmailAreaInput, 1000));
 
