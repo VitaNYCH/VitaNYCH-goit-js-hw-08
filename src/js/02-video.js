@@ -5,19 +5,19 @@ const STORAGE_KEY = 'videoplayer - current - time';
 
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
-    
+ 
 
 player.on('timeupdate', throttle(onPayerTime, 1000));
 
-function onPayerTime(currentTime) { localStorage.setItem(STORAGE_KEY, JSON.stringify(currentTime)); }
+function onPayerTime(currentTimeNow) {
+localStorage.setItem(STORAGE_KEY, JSON.stringify(currentTimeNow.seconds));
+};
 
-const timeForPlay = localStorage.getItem(STORAGE_KEY);
-const parseTimePlay = JSON.parse(timeForPlay);
 
-console.log(parseTimePlay.seconds);
+  const timeForPlay = Number(localStorage.getItem(STORAGE_KEY));
 
 player
-  .setCurrentTime(parseTimePlay.seconds)
+  .setCurrentTime(timeForPlay)
   .then(function (seconds) {})
   .catch(function (error) {
     switch (error.name) {
@@ -28,4 +28,7 @@ player
     }
   });
 
+ 
+
+// console.log(parseTimePlay.seconds);
 
