@@ -13,7 +13,7 @@ refs.emailarea.addEventListener('input', throttle(onEmailAreaInput, 1000));
 refs.textarea.addEventListener('input', throttle(onTextAreaInput, 1000));
 
 refs.form.addEventListener('input', evt => {
-    formData[evt.target.name] = [evt.target.value];
+  formData[evt.target.name] = evt.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 })
 
@@ -26,19 +26,21 @@ function onFormSubmit(evt) {
 }
 
 function onEmailAreaInput(evt) {
-   const email = evt.target.value;
+  const email = evt.target.value;
 }
 
 function onTextAreaInput(evt) {
   const message = evt.target.value;
+
 }
 
 function populateTextArea() {
     const savedMessage = localStorage.getItem(STORAGE_KEY);
-    const parseMessage = JSON.parse(savedMessage);
+  const parseMessage = JSON.parse(savedMessage);
+  console.log(parseMessage);
     
   if (parseMessage) {
-      refs.emailarea.value = parseMessage.email;
-      refs.textarea.value = parseMessage.message;     
+    refs.emailarea.value = parseMessage.email || " ";
+    refs.textarea.value = parseMessage.message || " ";  
   }
 }
